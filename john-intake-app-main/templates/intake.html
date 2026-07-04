@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Intake Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Patient Intake Form</h1>
+
+        <form method="POST">
+
+            <label>Full Name</label>
+            <input type="text" name="name" required>
+
+            <label>Email</label>
+            <input type="email" name="email" required>
+
+            <label>Phone Number</label>
+            <input type="text" name="phone">
+
+            <label>Date of Birth</label>
+            <input type="date" name="dob">
+
+            <input type="submit" value="Submit Intake">
+
+        </form>
+
+    </div>
+
+</body>
+</html>
