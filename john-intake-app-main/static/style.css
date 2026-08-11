@@ -96,8 +96,20 @@ tr:hover {
 /* Admin dashboard action buttons */
 td .button {
     display: inline-block;
-    margin: 5px 10px 5px 0;
-    padding: 8px 14px;
+    margin: 4px 6px 4px 0;
+    padding: 8px 12px;
     white-space: nowrap;
+}
+
+/* Give Deposit and Actions columns room for buttons */
+th:nth-child(8),
+td:nth-child(8) {
+    min-width: 150px;
+}
+
+th:nth-child(10),
+td:nth-child(10) {
+    min-width: 190px;
+}
 }
 }
