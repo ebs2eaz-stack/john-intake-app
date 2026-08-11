@@ -69,7 +69,9 @@ input[type="submit"]:hover {
     background: #16306d;
 }
 .wide {
-    width: 900px;
+    width: 1050px;
+    max-width: 90%;
+}
 }
 
 table {
@@ -109,7 +111,7 @@ td:nth-child(8) {
 
 th:nth-child(10),
 td:nth-child(10) {
-    min-width: 190px;
+    min-width: 260px;
 }
 .button-group {
     display: flex;
