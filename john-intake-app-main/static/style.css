@@ -111,4 +111,15 @@ th:nth-child(10),
 td:nth-child(10) {
     min-width: 190px;
 }
+.button-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-top: 8px;
+}
 
+.button-group .button {
+    margin: 0;
+    white-space: nowrap;
+}
