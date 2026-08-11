@@ -69,10 +69,9 @@ input[type="submit"]:hover {
     background: #16306d;
 }
 .wide {
-    width: 1100px;
-    max-width: 90%;
+    width: 1200px;
+    max-width: 95%;
     box-sizing: border-box;
-
 }
 
 table {
