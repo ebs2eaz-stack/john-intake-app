@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KP KREATIONS | Edit Appointment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container wide">
+
+    <h1>Edit Appointment</h1>
+    <p class="subtitle">Update booking details for KP KREATIONS.</p>
+
+    <form method="POST">
+
+        <label>Client Name</label>
+        <input type="text" name="client_name" value="{{ appointment[1] }}" required>
+
+        <label>Phone</label>
+        <input type="text" name="phone" value="{{ appointment[2] }}">
+
+        <label>Email</label>
+        <input type="email" name="email" value="{{ appointment[3] }}">
+
+        <label>Service</label>
+        <input type="text" name="service" value="{{ appointment[4] }}">
+
+        <label>Stylist</label>
+        <input type="text" name="stylist" value="{{ appointment[5] }}">
+
+        <label>Appointment Date</label>
+        <input type="date" name="appointment_date" value="{{ appointment[6] }}">
+
+        <label>Appointment Time</label>
+        <input type="time" name="appointment_time" value="{{ appointment[7] }}">
+
+        <label>Hair Type</label>
+        <input type="text" name="hair_type" value="{{ appointment[8] }}">
+
+        <label>Hair Length</label>
+        <input type="text" name="hair_length" value="{{ appointment[9] }}">
+
+        <label>Notes</label>
+        <textarea name="notes" rows="4">{{ appointment[10] }}</textarea>
+
+        <label>Deposit Status</label>
+        <select name="deposit_status">
+            <option value="Not Paid" {% if appointment[11] == "Not Paid" %}selected{% endif %}>Not Paid</option>
+            <option value="Paid" {% if appointment[11] == "Paid" %}selected{% endif %}>Paid</option>
+        </select>
+
+        <label>Booking Status</label>
+        <select name="booking_status">
+            <option value="Pending" {% if appointment[12] == "Pending" %}selected{% endif %}>Pending</option>
+            <option value="Confirmed" {% if appointment[12] == "Confirmed" %}selected{% endif %}>Confirmed</option>
+            <option value="Cancelled" {% if appointment[12] == "Cancelled" %}selected{% endif %}>Cancelled</option>
+        </select>
+
+        <br><br>
+
+        <button type="submit">Save Changes</button>
+        <a href="/admin" class="button">Back to Dashboard</a>
+
+    </form>
+<br><br>
+
+<h2>Appointment Photo</h2>
+{% if appointment[13] %}
+    <p><strong>Current Photo:</strong></p>
+
+    <img src="{{ url_for('static', filename='uploads/' + appointment[13]) }}"
+         alt="Appointment Photo"
+         style="max-width: 300px; height: auto; border-radius: 10px; margin-bottom: 20px;">
+{% endif %}
+
+<form action="/upload-photo/{{ appointment[0] }}"
+      method="POST"
+      enctype="multipart/form-data">
+
+    <label>Select Photo</label>
+    <input type="file"
+           name="photo"
+           accept=".jpg,.jpeg,.png,.webp"
+           required>
+
+    <br><br>
+
+    <input type="submit" value="Upload Photo">
+
+</form>
+</div>
+
+</body>
+</html>

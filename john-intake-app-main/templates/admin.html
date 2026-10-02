@@ -1,38 +1,112 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin Dashboard</title>
+    <title>KP KREATIONS | Admin Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<a href="/logout" class="button">Logout</a>
-<div class="container wide">
-    <h1>Intake Submissions</h1>
-    <p class="subtitle">Review submitted intake records.</p>
 
+<div class="container">
+
+    <h1>KP KREATIONS Admin Dashboard</h1>
+    <p class="subtitle">Appointment Management</p>
+
+    <a href="/" class="button">Return Home</a>
+    <a href="/logout" class="button">Logout</a>
+
+    <br><br>
+<div class="filter-buttons">
+    <strong>Show:</strong>
+    <a href="/admin?status=active"
+   class="button {% if request.args.get('status', 'active') == 'active' %}filter-active{% endif %}">Active</a>
+
+<a href="/admin?status=pending"
+   class="button {% if request.args.get('status') == 'pending' %}filter-active{% endif %}">Pending</a>
+
+<a href="/admin?status=confirmed"
+   class="button {% if request.args.get('status') == 'confirmed' %}filter-active{% endif %}">Confirmed</a>
+
+<a href="/admin?status=cancelled"
+   class="button {% if request.args.get('status') == 'cancelled' %}filter-active{% endif %}">Cancelled</a>
+
+<a href="/admin?status=all"
+   class="button {% if request.args.get('status') == 'all' %}filter-active{% endif %}">All</a>
+</div>
+
+<br>
     <table>
         <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
+            <th>Client</th>
+            <th>Service</th>
+            <th>Style / Price</th>
+            <th>Stylist</th>
+            <th>Date</th>
+            <th>Time</th>
             <th>Phone</th>
-            <th>Date of Birth</th>
+            <th>Photo</th>
+            <th>Deposit</th>
+            <th>Status</th>
+            <th>Actions</th>
         </tr>
 
-        {% for item in submissions %}
+        {% for a in appointments %}
         <tr>
-            <td>{{ item[0] }}</td>
-            <td>{{ item[1] }}</td>
-            <td>{{ item[2] }}</td>
-            <td>{{ item[3] }}</td>
-            <td>{{ item[4] }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+            <td>{{ a[0] }}</td>
+            <td>{{ a[1] }}</td>
+            <td>{{ a[4] }}</td>
+            <td>{{ a[5] if a[5] else "—" }}</td>
+            <td>{{ a[6] }}</td>
+            <td>{{ a[7] }}</td>
+            <td>{{ a[8] }}</td>
+            <td>{{ a[2] }}</td>
+            <td>
+    {% if a[14] %}
+    <a href="{{ url_for('static', filename='uploads/' + a[14]) }}" target="_blank">
+        <img src="{{ url_for('static', filename='uploads/' + a[14]) }}"
+                 alt="Inspiration Photo"
+                 style="width:70px; height:70px; object-fit:cover; border-radius:8px;">
+        </a>
+    {% else %}
+        No Photo
+    {% endif %}
+</td>
+            
+    <td>
+    {% if a[12] == "Paid" %}
+        <a href="/deposit-unpaid/{{ a[0] }}" class="button" style="white-space: nowrap;">
+            Mark Unpaid
+        </a>
+    {% else %}
+        <a href="/deposit-unpaid/{{ a[0] }}" class="button" style="white-space: nowrap;">
+            Mark Paid
+        </a>
+    {% endif %}
+</td>
 
-    <br>
-    <a href="/" class="button">Return Home</a>
-</div>
+<td>
+    <span class="status-badge status-{{ a[13]|lower }}">
+        {{ a[13] }}
+    </span>
+</td>
 
-</body>
-</html>
+<td>
+    <div style="display:flex; gap:10px; align-items:center; white-space:nowrap;">
+
+        <a href="/edit/{{ a[0] }}" class="button">Edit</a>
+
+        {% if a[13] == "Pending" %}
+            <a href="/confirm/{{ a[0] }}" class="button">Confirm</a>
+            <a href="/cancel/{{ a[0] }}" class="button" onclick="return confirm('Are you sure you want to cancel this appointment?');">Cancel</a>
+        {% elif a[13] == "Confirmed" %}
+            <a href="/cancel/{{ a[0] }}" class="button" onclick="return confirm('Are you sure you want to cancel this appointment?');">Cancel</a>
+
+        {% elif a[13] == "Cancelled" %}
+            <a href="/restore/{{ a[0] }}" class="button">Restore</a>
+        {% endif %}
+
+    </div>
+</td>
+
+</tr>
+{% endfor %}

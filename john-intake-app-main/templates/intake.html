@@ -1,34 +1,308 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Patient Intake Form</title>
+    <title>KP KREATIONS | Book Appointment</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>Patient Intake Form</h1>
+    <h1>KP KREATIONS</h1>
+    <img src="{{ url_for('static', filename='images/hero.png') }}"
+     alt="KP KREATIONS Hair Styling"
+     style="width:100%; max-width:700px; height:auto; border-radius:12px; display:block; margin:20px auto 30px auto;">
+    <div style="text-align:center; margin:25px 0 30px 0;">
+    <h2 style="margin-bottom:8px;">Book Your Hair Appointment</h2>
+    <p style="font-size:17px; margin:0;">
+        Tell us about your hair and the style you're looking for.
+    </p>
+</div>
+<form method="POST" enctype="multipart/form-data">
+<div style="margin-bottom:25px;">
+    <a href="/" style="text-decoration:none; font-weight:bold;">
+        ← Back to Home
+    </a>
+</div>
 
-        <form method="POST">
 
-            <label>Full Name</label>
-            <input type="text" name="name" required>
+        <h2>Client Information</h2>
 
-            <label>Email</label>
-            <input type="email" name="email" required>
+        <label>Full Name</label>
+        <input type="text" name="client_name" required>
 
-            <label>Phone Number</label>
-            <input type="text" name="phone">
+        <label>Phone</label>
+        <input type="text" name="phone" required>
 
-            <label>Date of Birth</label>
-            <input type="date" name="dob">
+        <label>Email</label>
+        <input type="email" name="email">
 
-            <input type="submit" value="Submit Intake">
+        <hr>
 
-        </form>
+        <h2>Appointment Details</h2>
 
-    </div>
+        <label>Service</label>
+        <select name="service" id="service" required>
+    <option value="">Select a Service</option>
+    <option value="Cornrows">Cornrows</option>
+    <option value="Lemonades">Lemonades</option>
+    <option value="Knotless Braids">Knotless Braids</option>
+    <option value="Bohemian Knotless">Bohemian Knotless</option>
+    <option value="Feed In Buns">Feed In Buns</option>
+    <option value="Two Braids">Two Braids</option>
+    <option value="Pop Smokes">Pop Smokes</option>
+    <option value="Pop Smoke Singles">Pop Smoke Singles</option>
+    <option value="Braided Ponytail">Braided Ponytail</option>
+    <option value="Half & Half Braids">Half & Half Braids</option>
+    <option value="Touch Ups">Touch Ups</option>
+    <option value="Traditional Sew In">Traditional Sew In</option>
+    <option value="Regular Quickweaves">Regular Quickweaves</option>
+    <option value="Half & Half Sew Ins">Half & Half Sew Ins</option>
+    <option value="Weave Ponytails">Weave Ponytails</option>
+    <option value="Ponytails">Ponytails</option>
+    <option value="Natural Hair">Natural Hair</option>
+    <option value="Men Style">Men Style</option>
 
+</select>
+<label>Service Option / Price</label>
+<select name="service_option" id="service_option">
+    <option value="">Select a Service First</option>
+</select>
+        <label>Stylist</label>
+        <input type="text" name="stylist">
+
+        <label>Appointment Date</label>
+        <input type="date" name="appointment_date" required>
+
+        <label>Appointment Time</label>
+        <input type="time" name="appointment_time" required>
+
+        <hr>
+
+        <h2>Hair Information</h2>
+
+        <label>Hair Type</label>
+        <select name="hair_type">
+            <option value="">Select Hair Type</option>
+            <option value="Straight">Straight</option>
+            <option value="Wavy">Wavy</option>
+            <option value="Curly">Curly</option>
+            <option value="Coily">Coily</option>
+            <option value="Locs">Locs</option>
+        </select>
+
+        <label>Hair Length</label>
+        <select name="hair_length">
+            <option value="">Select Hair Length</option>
+            <option value="Short">Short</option>
+            <option value="Shoulder Length">Shoulder Length</option>
+            <option value="Mid Back">Mid Back</option>
+            <option value="Long">Long</option>
+        </select>
+<label>Notes / Special Requests</label>
+<textarea name="notes" rows="5"></textarea>
+
+<label>Hairstyle Inspiration Photo</label>
+<p class="subtitle">Upload a photo of the hairstyle you would like.</p>
+
+<input type="file"
+       name="photo"
+       accept=".jpg,.jpeg,.png,.webp">
+
+<br><br>
+
+<button type="submit">Book Appointment</button>
+
+        
+    </form>
+
+</div>
+<script>
+    const serviceSelect = document.getElementById("service");
+    const serviceOptionSelect = document.getElementById("service_option");
+
+    serviceSelect.addEventListener("change", function () {
+        serviceOptionSelect.innerHTML = "";
+
+        if (this.value === "Two Braids") {
+            serviceOptionSelect.innerHTML = `
+                <option value="">Select an Option</option>
+                <option value="Two Braids - No Heat - $75">No Heat - $75</option>
+                <option value="Two Braids - With Heat - $95">With Heat - $95</option>
+            `;
+        } else if (this.value === "Cornrows") {
+    serviceOptionSelect.innerHTML = `
+        <option value="">Select an Option</option>
+        <option value="Cornrows - Large Up to 6 - $120">Large - Up to 6 - $120</option>
+        <option value="Cornrows - Large Long - $130">Large - Long - $130</option>
+        <option value="Cornrows - Medium 7-8 - $160">Medium - 7-8 - $160</option>
+        <option value="Cornrows - Medium Long - $175">Medium - Long - $175</option>
+        <option value="Cornrows - Small 9-10 - $200">Small - 9-10 - $200</option>
+        <option value="Cornrows - Small Long - $215">Small - Long - $215</option>
+        <option value="Cornrows - Small No Stitch Up to 15 - $235">Small No Stitch - Up to 15 - $235</option>
+        <option value="Cornrows - Small No Stitch Long - $250">Small No Stitch - Long - $250</option>
+        <option value="Cornrows - Extra Small 20 - $250">Extra Small - 20 - $250</option>
+        <option value="Cornrows - Extra Small Long - $275">Extra Small - Long - $275</option>
+    `;
+} else if (this.value === "Lemonades") {
+    serviceOptionSelect.innerHTML = `
+        <option value="">Select an Option</option>
+        <option value="Lemonades - Small No Stitch - $275">Small No Stitch - $275</option>
+        <option value="Lemonades - Small Long - $300">Small Long - $300</option>
+        <option value="Lemonades - Small With Stitch - $325">Small With Stitch - $325</option>
+        <option value="Lemonades - Medium With Stitch - $275">Medium With Stitch - $275</option>
+        <option value="Lemonades - Medium Long - $300">Medium Long - $300</option>
+        <option value="Lemonades - Medium - $235">Medium - $235</option>
+        <option value="Lemonades - Medium Long - $200">Medium Long - $200</option>
+        <option value="Lemonades - Large With Stitch - $175">Large With Stitch - $175</option>
+        <option value="Lemonades - Large Long - $200">Large Long - $200</option>
+    `;
+    } else if (this.value === "Knotless Braids") {
+    serviceOptionSelect.innerHTML = `
+        <option value="">Select an Option</option>
+        <option value="Knotless Braids - Smedium - $250">Smedium - $250</option>
+        <option value="Knotless Braids - Smedium Long - $275">Smedium Long - $275</option>
+        <option value="Knotless Braids - Medium - $200">Medium - $200</option>
+        <option value="Knotless Braids - Medium Long - $225">Medium Long - $225</option>
+        <option value="Knotless Braids - Large - $135">Large - $135</option>
+        <option value="Knotless Braids - Large Long - $135">Large Long - $135</option>
+        <option value="Knotless Braids - Jumbo - $125">Jumbo - $125</option>
+    `;
+} else if (this.value === "Bohemian Knotless") {
+    serviceOptionSelect.innerHTML = `
+        <option value="">Select an Option</option>
+        <option value="Bohemian Knotless - Smedium - $300">Smedium - $300</option>
+        <option value="Bohemian Knotless - Smedium Long - $350">Smedium Long - $350</option>
+        <option value="Bohemian Knotless - Medium - $250">Medium - $250</option>
+        <option value="Bohemian Knotless - Medium Long - $275">Medium Long - $275</option>
+        <option value="Bohemian Knotless - Large - $150">Large - $150</option>
+        <option value="Bohemian Knotless - Large Long - $175">Large Long - $175</option>
+        <option value="Bohemian Knotless - Jumbo - $125">Jumbo - $125</option>
+        <option value="Bohemian Knotless - Jumbo Long - $135">Jumbo Long - $135</option>
+    `;} else if (this.value === "Feed In Buns") {
+    serviceOptionSelect.innerHTML = `
+        <option value="">Select an Option</option>
+        <option value="Feed In Buns - Refer to Cornrow Styles">
+            Refer to Cornrow Styles / Pricing
+        </option>
+    `;} else if (this.value === "Pop Smokes") {
+    serviceOptionSelect.innerHTML = `
+        <option value="">Select an Option</option>
+        <option value="Pop Smokes - Up to 8 - $175">Up to 8 - $175</option>
+        <option value="Pop Smokes - Long - $185">Long - $185</option>
+        <option value="Pop Smokes - Extra Braid - $10 each">Extra Braid - $10 each</option>
+    `;} else if (this.value === "Pop Smoke Singles") {
+    serviceOptionSelect.innerHTML = `
+        <option value="">Select an Option</option>
+        <option value="Pop Smoke Singles - Large 3 Rows - $175">Large (3 Rows) - $175</option>
+        <option value="Pop Smoke Singles - Large 3 Rows Long - $190">Large (3 Rows) Long - $190</option>
+        <option value="Pop Smoke Singles - Medium 4 Rows - $200">Medium (4 Rows) - $200</option>
+        <option value="Pop Smoke Singles - Medium 4 Rows Long - $225">Medium (4 Rows) Long - $225</option>
+    `;} else if (this.value === "Braided Ponytail") {
+    serviceOptionSelect.innerHTML = `
+        <option value="">Select an Option</option>
+        <option value="Braided Ponytail - Large Up to 8 - $175">Large - Up to 8 - $175</option>
+        <option value="Braided Ponytail - Large Long - Add $10">Large Long - Add $10</option>
+        <option value="Braided Ponytail - Large Boho - Add $15">Large Boho - Add $15</option>
+        <option value="Braided Ponytail - Medium Up to 10 - $200">Medium - Up to 10 - $200</option>
+        <option value="Braided Ponytail - Medium Long - $225">Medium Long - $225</option>
+        <option value="Braided Ponytail - Medium Boho - Add $25">Medium Boho - Add $25</option>
+        <option value="Braided Ponytail - Smedium Up to 15 - $250">Smedium - Up to 15 - $250</option>
+        <option value="Braided Ponytail - Smedium Long - $275">Smedium Long - $275</option>
+        <option value="Braided Ponytail - Smedium Boho - Add $25">Smedium Boho - Add $25</option>
+    `;} else if (this.value === "Half & Half Braids") {
+    serviceOptionSelect.innerHTML = `
+        <option value="">Select an Option</option>
+        <option value="Half & Half Braids - Small Tribals/Fulani No Stitch - $275">Small Tribals/Fulani No Stitch - $275</option>
+        <option value="Half & Half Braids - Small Tribals/Fulani No Stitch Long - $300">Small Tribals/Fulani No Stitch Long - $300</option>
+        <option value="Half & Half Braids - Smedium Up to 12 - $250">Smedium - Up to 12 Braids - $250</option>
+        <option value="Half & Half Braids - Smedium Long - $275">Smedium Long - $275</option>
+        <option value="Half & Half Braids - Smedium Boho - Add $25">Smedium Boho - Add $25</option>
+        <option value="Half & Half Braids - Medium Up to 10 - $225">Medium - Up to 10 Braids - $225</option>
+        <option value="Half & Half Braids - Medium Long - $250">Medium Long - $250</option>
+        <option value="Half & Half Braids - Medium Boho - Add $20">Medium Boho - Add $20</option>
+        <option value="Half & Half Braids - Large 8 Braids - $200">Large - 8 Braids - $200</option>
+        <option value="Half & Half Braids - Large Long - $225">Large Long - $225</option>
+        <option value="Half & Half Braids - Large Boho - Add $15">Large Boho - Add $15</option>
+        <option value="Half & Half Braids - Jumbo Up to 6 - $150">Jumbo - Up to 6 - $150</option>
+        <option value="Half & Half Braids - Jumbo Long - $175">Jumbo Long - $175</option>
+        <option value="Half & Half Braids - Jumbo Boho - Add $10">Jumbo Boho - Add $10</option>
+    `;} else if (this.value === "Touch Ups") {
+    serviceOptionSelect.innerHTML = `
+        <option value="">Select an Option</option>
+        <option value="Touch Ups - Small - $90">Small - $90</option>
+        <option value="Touch Ups - Medium - $65">Medium - $65</option>
+        <option value="Touch Ups - Large - $45">Large - $45</option>
+    `;} else if (this.value === "Traditional Sew In") {
+    serviceOptionSelect.innerHTML = `
+        <option value="">Select an Option</option>
+        <option value="Traditional Sew In - Style - $150">With Style (Curls or Straightened) - $150</option>
+        <option value="Traditional Sew In - Crimps/Wand Coils - Add $35">Crimps/Wand Coils - Add $35</option>
+    `;} else if (this.value === "Regular Quickweaves") {
+    serviceOptionSelect.innerHTML = `
+        <option value="">Select an Option</option>
+        <option value="Regular Quickweaves - Bobs - $85">Bobs - $85</option>
+        <option value="Regular Quickweaves - Style Looks - $125">Style Looks (Curls, Straightened) - $125</option>
+        <option value="Regular Quickweaves - Crimps & Wand Curls - $150">Crimps & Wand Curls - $150</option>
+    `;} else if (this.value === "Half & Half Sew Ins") {
+    serviceOptionSelect.innerHTML = `
+        <option value="">Select an Option</option>
+        <option value="Half & Half Sew Ins - Small No Stitch - $200">Small (No Stitch) - $200</option>
+        <option value="Half & Half Sew Ins - Small Stitch - $225">Small (Stitch) - $225</option>
+        <option value="Half & Half Sew Ins - Smedium 10 Braids - $180">Smedium - 10 Braids - $180</option>
+        <option value="Half & Half Sew Ins - Medium 8 Braids - $150">Medium - 8 Braids - $150</option>
+        <option value="Half & Half Sew Ins - Large 6 Braids - $135">Large - 6 Braids - $135</option>
+        <option value="Half & Half Sew Ins - Quickweave - Subtract $20">Quickweave - Subtract $20 From Price Above</option>
+    `;} else if (this.value === "Weave Ponytails") {
+    serviceOptionSelect.innerHTML = `
+        <option value="">Select an Option</option>
+        <option value="Weave Ponytails - With Press - No Braids - $90">With Press - No Braids - $90</option>
+        <option value="Weave Ponytails - With Press - 1-2 Braids - $100">With Press - 1-2 Braids - $100</option>
+        <option value="Weave Ponytails - With Press - 3-4 Braids - $120">With Press - 3-4 Braids - $120</option>
+        <option value="Weave Ponytails - With Press - 5-6 Braids - $135">With Press - 5-6 Braids - $135</option>
+        <option value="Weave Ponytails - With Press - 7+ Braids - Starting at $135">With Press - 7+ Braids - Starting at $135</option>
+
+        <option value="Weave Ponytails - No Press - No Braids - $75">No Press - No Braids - $75</option>
+        <option value="Weave Ponytails - No Press - 1-2 Braids - $90">No Press - 1-2 Braids - $90</option>
+        <option value="Weave Ponytails - No Press - 3-4 Braids - $100">No Press - 3-4 Braids - $100</option>
+        <option value="Weave Ponytails - No Press - 5-6 Braids - $120">No Press - 5-6 Braids - $120</option>
+        <option value="Weave Ponytails - No Press - 7+ Braids - Starting at $135">No Press - 7+ Braids - Starting at $135</option>
+    `;} else if (this.value === "Ponytails") {
+    serviceOptionSelect.innerHTML = `
+        <option value="">Select an Option</option>
+        <option value="Ponytails - Simple Ponytail - $90">Simple Ponytail - $90</option>
+        <option value="Ponytails - Mohawk Bun with a Bang - $115">Mohawk Bun with a Bang - $115</option>
+        <option value="Ponytails - Braided Pony with Weave 5-10 Braids - $130">Braided Pony (with Weave) - 5-10 Braids - $130</option>
+    `;} else if (this.value === "Natural Hair") {
+    serviceOptionSelect.innerHTML = `
+        <option value="">Select an Option</option>
+        <option value="Natural Hair - Loc Retwist - $100">Loc Retwist - $100</option>
+        <option value="Natural Hair - Loc Retwist + Wash - $135">Loc Retwist + Wash - $135</option>
+        <option value="Natural Hair - Loc Retwist + Style - $115">Loc Retwist + Style - $115</option>
+        <option value="Natural Hair - Loc Retwist + Take Down - $120">Loc Retwist + Take Down - $120</option>
+        <option value="Natural Hair - Flat Twist 6 - $110">Flat Twist 6 - $110</option>
+        <option value="Natural Hair - Flat Twist 8 - $120">Flat Twist 8 - $120</option>
+        <option value="Natural Hair - Flat Twist 10 - $130">Flat Twist 10 - $130</option>
+        <option value="Natural Hair - Flat Twist + Wash - $35">Flat Twist - Add Wash +$35</option>
+    `;} else if (this.value === "Men Style") {
+    serviceOptionSelect.innerHTML = `
+        <option value="">Select an Option</option>
+        <option value="Men Style - Two Strand - $100">Two Strand - $100</option>
+        <option value="Men Style - Small - $100">Small - $100</option>
+        <option value="Men Style - Medium - $75">Medium - $75</option>
+        <option value="Men Style - Add Wash - $35">Add Wash - +$35</option>
+        <option value="Men Style - Corn Rows 6 - $75">Corn Rows 6 - $75</option>
+        <option value="Men Style - Corn Rows 8 - $90">Corn Rows 8 - $90</option>
+        <option value="Men Style - Corn Rows 10 - $115">Corn Rows 10 - $115</option>
+        <option value="Men Style - Barrel Twist 4 - $100">Barrel Twist (No Locs) - 4 Barrel - $100</option>
+        <option value="Men Style - Barrel Twist 6 - $115">Barrel Twist (No Locs) - 6 Barrel - $115</option>
+        <option value="Men Style - Barrel Twist 8 - $125">Barrel Twist (No Locs) - 8 Barrel - $125</option>
+    `;} else {
+            serviceOptionSelect.innerHTML = `
+                <option value="">Select a Service First</option>
+            `;
+        }
+    });
+</script>
 </body>
 </html>

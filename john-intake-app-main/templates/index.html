@@ -1,22 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>John Intake App</title>
+    <title>KP KREATIONS</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-    <div class="container">
-        <h1>John Intake Portal</h1>
+<div class="container">
 
-        <p class="subtitle">
-            Secure patient intake and onboarding portal.
-        </p>
+    <h1>KP KREATIONS</h1>
+    <a href="/book">
+    <img src="{{ url_for('static', filename='images/hero.png') }}"
+         alt="KP KREATIONS Hair Styling"
+         style="width:100%; max-width:1000px; height:auto; border-radius:12px; margin:20px 0; cursor:pointer;">
+</a>
 
-        <a href="/intake" class="button">
-            Start Intake Form
-        </a>
-    </div>
+    <div style="text-align:center; margin:25px 0;">
+    <h2 style="margin-bottom:8px;">Welcome to KP KREATIONS</h2>
+
+    <p style="font-size:18px; margin-top:0;">
+        Professional styling designed around you.
+    </p>
+</div>
+        
+
+   <div style="text-align:center; margin:25px 0;">
+    <a href="/book"
+       class="button"
+       style="font-size:18px; padding:14px 28px;">
+        Book Your Appointment
+    </a>
+</div>
+
+    <br><br>
+
+    <a href="/login" class="button">
+        Admin Login
+    </a>
+
+</div>
 
 </body>
 </html>
