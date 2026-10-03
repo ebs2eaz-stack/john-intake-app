@@ -86,6 +86,25 @@ def book():
         conn = sqlite3.connect("appointments.db")
         cursor = conn.cursor()
 
+        # Prevent double-booking the same stylist, date, and time
+        cursor.execute("""
+            SELECT id
+            FROM appointments
+            WHERE stylist = ?
+            AND appointment_date = ?
+            AND appointment_time = ?
+            AND booking_status != 'Cancelled'
+        """, (stylist, appointment_date, appointment_time))
+
+        existing_appointment = cursor.fetchone()
+
+        if existing_appointment:
+            conn.close()
+            return render_template(
+                "intake.html",
+                error="That stylist is already booked for the selected date and time. Please choose another time."
+            )
+
         cursor.execute("""
             INSERT INTO appointments (
                 client_name,
